@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/flashcard_question"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:text="Who Won the 2022 Superbowl?"
+        android:textSize="40sp"
+        android:gravity="center"
+        android:background="@drawable/card_background"
+        android:textColor="@color/white"
+        android:elevation="5dp"
+
+         />
+
+    <TextView
+        android:id="@+id/flashcard_answer"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="L.A. Rams"
+        android:textSize="40sp"
+        android:background="#fca311"
+        android:textColor="@color/black"
+        android:layout_below="@+id/flashcard_question"
+        android:layout_marginTop="30dp"/>
+
+    <TextView
+        android:id="@+id/flashcard_answer2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="Cincinnati Bengals"
+        android:textSize="40sp"
+        android:background="#fca311"
+        android:textColor="@color/black"
+        android:layout_below="@+id/flashcard_answer"
+        android:layout_marginTop="30dp"/>
+
+    <TextView
+        android:id="@+id/flashcard_answer3"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="Kansas City Chiefs"
+        android:textSize="40sp"
+        android:background="#fca311"
+        android:textColor="@color/black"
+        android:layout_below="@+id/flashcard_answer2"
+        android:layout_marginTop="30dp"/>
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/toggle_choices_visibility"
+        android:src="@drawable/iconmonstr_eye_open"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"/>
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/toggle_choices_invisibility"
+        android:src="@drawable/iconmonstr_eye_closed"
+        android:visibility="invisible"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>
