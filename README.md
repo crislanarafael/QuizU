@@ -1,8 +1,31 @@
-# QuizU - For Lab #1 of CodePath's Mobile App Development Spring 2022 Course
-App that completes Lab 1 for CodePath's Mobile App Development Spring 2022 Course
+# QuizU - For Lab #2 of CodePath's Mobile App Development Spring 2022 Course
+App that completes Lab 2 for CodePath's Mobile App Development Spring 2022 Course
 
+### App Description
+Lab 2 work for CodePath's Mobile App Development Spring 2022 Course (Android)
 
-## App Walk-though
+### App Walk-though for Lab #2
+### Required User Stories Walk-through
+
+<img src="http://recordit.co/z80Qrz7eXG.gif" width=200><br>
+
+### Optional User Stories Walk-through
+
+## Required
+- [x] User can click on a ‘+’ button that takes the user to new ‘Add Card Screen’
+- [x] The 'Add Card Screen' has a cancel button to take the user back to the main screen
+- [x] User can enter and submit a Question and Answer through the 'Add Card Screen'
+- [x] User will see the card they just created on the main screen when they press the 'Save Button'
+- [x] Push your progress to GitHub!
+
+## Optional
+- [ ] User can edit a card
+- [ ] An error message is shown if the user doesn't enter both a Question and an Answer
+- [ ] A notification is shown if the card was created successfully
+- [ ] User can also enter multiple choice answers when creating a card
+- [ ] App is further styled and customized!
+
+### App Walk-though for Lab #1
 
 ### Required User Stories Walk-through
 
