@@ -79,6 +79,7 @@
         android:layout_alignParentRight="true"
         android:src="@drawable/ic_next_icon"
         android:layout_marginTop="500dp"
+        android:layout_marginRight="5dp"
         />
 
 </RelativeLayout>
