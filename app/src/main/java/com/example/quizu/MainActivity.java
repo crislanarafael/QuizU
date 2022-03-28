@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     TextView flashcardQuestion;
@@ -20,35 +22,59 @@ public class MainActivity extends AppCompatActivity {
     ImageView eyeopen;
     ImageView eyeclosed;
     ImageView add;
+    ImageView edit;
+    ImageView next;
 
+    FlashcardDatabase flashcardDatabase;
+    List<Flashcard> allFlashcards;
+    int currentCardDisplayedIndex = 0;
 
-    /*@Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Log.v("String", "Hi");
-        if (resultCode == RESULT_OK) { // this 100 needs to match the 100 we used when we called startActivityForResult!
-            final String string1 = data.getExtras().getString("question"); // 'string1' needs to match the key we used when we put the string in the Intent
-            final String string2 = data.getExtras().getString("answer");
-
-            flashcardQuestion.setText(string1);
-        }
-    }*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //week 5
+        next = findViewById(R.id.next_icon);
+        flashcardDatabase = new FlashcardDatabase(this);
+        allFlashcards = flashcardDatabase.getAllCards();
+
+        if (allFlashcards != null && allFlashcards.size() > 0) {
+            ((TextView) findViewById(R.id.flashcard_question)).setText(allFlashcards.get(0).getQuestion());
+            ((TextView) findViewById(R.id.flashcard_new_answer)).setText(allFlashcards.get(0).getAnswer());
+        }
+        //end week 5
+
+
         flashcardQuestion = findViewById(R.id.flashcard_question);
         flashcardAnswer = findViewById(R.id.flashcard_new_answer);
-        flashcardAnswer1 = findViewById(R.id.flashcard_answer);
-        flashcardAnswer2 = findViewById(R.id.flashcard_answer2);
-        flashcardAnswer3 = findViewById(R.id.flashcard_answer3);
+        //flashcardAnswer1 = findViewById(R.id.flashcard_answer);
+        //flashcardAnswer2 = findViewById(R.id.flashcard_answer2);
+        //flashcardAnswer3 = findViewById(R.id.flashcard_answer3);
         eyeopen = findViewById(R.id.toggle_choices_visibility);
         eyeclosed = findViewById(R.id.toggle_choices_invisibility);
         add = findViewById(R.id.add_icon);
+        edit = findViewById(R.id.edit_icon);
 
 
+
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Log.v("string", (String) flashcardQuestion.getText());
+                //Log.v("string", (String) flashcardAnswer.getText());
+                String one = flashcardQuestion.getText().toString();
+                String two = flashcardAnswer.getText().toString();
+
+                Intent intent = new Intent(MainActivity.this, AddCardActivity.class); // create a new Intent, this is where we will put our data
+                intent.putExtra("EditQuestion", one); // puts one string into the Intent, with the key as 'string1'
+                intent.putExtra("EditAnswer", two); // puts another string into the Intent, with the key as 'string2
+                //startActivity(data);
+                setResult(100, intent); // set result code and bundle data for response
+                MainActivity.this.startActivityForResult(intent, 100);
+            }
+        });
 
         flashcardQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,14 +96,27 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        flashcardAnswer.setOnClickListener(new View.OnClickListener() {
+        next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (allFlashcards.size() == 0){
+                    return;
+                }
+                currentCardDisplayedIndex++;
 
+                if (currentCardDisplayedIndex >= allFlashcards.size()){
+                    currentCardDisplayedIndex = 0;
+                }
+
+                allFlashcards = flashcardDatabase.getAllCards();
+                Flashcard flashcard = allFlashcards.get(currentCardDisplayedIndex);
+
+                ((TextView) findViewById(R.id.flashcard_question)).setText(flashcard.getAnswer());
+                ((TextView) findViewById(R.id.flashcard_new_answer)).setText(flashcard.getQuestion());
             }
         });
 
-        flashcardAnswer1.setOnClickListener(new View.OnClickListener() {
+        /*flashcardAnswer1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 flashcardAnswer1.setBackgroundColor(getResources().getColor(R.color.green));
@@ -98,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
                 flashcardAnswer1.setBackgroundColor(getResources().getColor(R.color.green));
                 flashcardAnswer3.setBackgroundColor(getResources().getColor(R.color.red));
             }
-        });
+        });*/
 
         eyeopen.setOnClickListener(new View.OnClickListener() { //if clicked, eye will become invisible and hide answers
             @Override
@@ -148,6 +187,9 @@ public class MainActivity extends AppCompatActivity {
                 String ans = data.getExtras().getString("answer");
                 flashcardQuestion.setText(ques);
                 flashcardAnswer.setText(ans);
+
+                flashcardDatabase.insertCard(new Flashcard(ques, ans));
+                allFlashcards = flashcardDatabase.getAllCards();
             }
         }
     }

@@ -1,5 +1,6 @@
 package com.example.quizu;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -12,6 +13,8 @@ import android.widget.ImageView;
 
 public class AddCardActivity extends AppCompatActivity {
 
+    EditText question;
+    EditText answer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,8 +22,8 @@ public class AddCardActivity extends AppCompatActivity {
 
         ImageView cancel = findViewById(R.id.cancel_button);
         ImageView save = findViewById(R.id.save_button);
-        EditText question = findViewById(R.id.question);
-        EditText answer = findViewById(R.id.answer);
+        question = findViewById(R.id.question);
+        answer = findViewById(R.id.answer);
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +52,21 @@ public class AddCardActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent intent){
+        super.onActivityResult(requestCode, resultCode, intent);
+        if (resultCode == 100){
+            if (intent != null){
+                String ques = intent.getExtras().getString("EditQuestion");
+                String ans = intent.getExtras().getString("EditAnswer");
+                Log.v("hi", ques);
+                Log.v("ho", ques);
+                question.setText(ques);
+                answer.setText(ans);
+            }
+        }
     }
 
 

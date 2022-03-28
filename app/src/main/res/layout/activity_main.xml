@@ -33,41 +33,7 @@
 
         />
 
-    <TextView
-        android:id="@+id/flashcard_answer"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:text="L.A. Rams"
-        android:textSize="40sp"
-        android:background="#fca311"
-        android:textColor="@color/black"
-        android:layout_below="@+id/flashcard_question"
-        android:layout_marginTop="30dp"/>
 
-    <TextView
-        android:id="@+id/flashcard_answer2"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:text="Cincinnati Bengals"
-        android:textSize="40sp"
-        android:background="#fca311"
-        android:textColor="@color/black"
-        android:layout_below="@+id/flashcard_answer"
-        android:layout_marginTop="30dp"/>
-
-    <TextView
-        android:id="@+id/flashcard_answer3"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:text="Kansas City Chiefs"
-        android:textSize="40sp"
-        android:background="#fca311"
-        android:textColor="@color/black"
-        android:layout_below="@+id/flashcard_answer2"
-        android:layout_marginTop="30dp"/>
 
     <ImageView
         android:layout_width="40dp"
@@ -95,5 +61,24 @@
         android:layout_alignParentRight="true"
         android:layout_marginBottom="5dp"
         android:layout_marginRight = "5dp"/>
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/edit_icon"
+        android:src="@drawable/ic_edit_icon"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft = "5dp"/>
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/next_icon"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_next_icon"
+        android:layout_marginTop="500dp"
+        />
 
 </RelativeLayout>
