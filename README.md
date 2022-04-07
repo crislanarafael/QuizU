@@ -1,5 +1,5 @@
 # QuizU - For Lab #3 of CodePath's Mobile App Development Spring 2022 Course
-App that completes Lab 3 for CodePath's Mobile App Development Spring 2022 Course
+App that completes Lab 4 (including Lab 1, Lab 2, and Lab 3) for CodePath's Mobile App Development Spring 2022 Course
 
 ## App Description
 Lab 4 work for CodePath's Mobile App Development Spring 2022 Course (Android)
