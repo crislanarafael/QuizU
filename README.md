@@ -7,6 +7,8 @@ Lab 3 work for CodePath's Mobile App Development Spring 2022 Course (Android)
 ## App Walk-though for Lab #3
 
 ### Required User Stories Walk-through
+**Update:** New GIF that shows the user can create a card and still see their created card when the app is relaunched user story
+<img src="http://recordit.co/7Ifv8tB1I0.gif" width=200><br>
 <img src="http://recordit.co/UMk8yTrvqK.gif" width=200><br>
 
 ### Optional User Stories Walk-through
