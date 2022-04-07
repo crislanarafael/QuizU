@@ -11,7 +11,7 @@
         android:theme="@style/Theme.QuizU" >
         <activity
             android:name=".AddCardActivity"
-
+            android:launchMode="singleInstance"
             android:exported="true" />
         <activity
             android:name=".MainActivity"

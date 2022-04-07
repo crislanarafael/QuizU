@@ -3,10 +3,14 @@ package com.example.quizu;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.Animator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -89,16 +93,31 @@ public class MainActivity extends AppCompatActivity {
         flashcardAnswer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // get the center for the clipping circle
+                int cx = flashcardAnswer.getWidth() / 2;
+                int cy = flashcardAnswer.getHeight() / 2;
 
+                // get the final radius for the clipping circle
+                float finalRadius = (float) Math.hypot(cx, cy);
 
+                // create the animator for this view (the start radius is zero)
+                Animator anim = ViewAnimationUtils.createCircularReveal(flashcardAnswer, cx, cy, 0f, finalRadius);
+
+                // hide the question and show the answer to prepare for playing the animation!
                 flashcardQuestion.setVisibility(View.VISIBLE);
                 flashcardAnswer.setVisibility(View.INVISIBLE);
+
+                anim.setDuration(1000);
+                anim.start();
             }
         });
+
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
                 if (allFlashcards.size() == 0){
                     return;
                 }
@@ -109,10 +128,49 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 allFlashcards = flashcardDatabase.getAllCards();
+                /*
                 Flashcard flashcard = allFlashcards.get(currentCardDisplayedIndex);
 
-                ((TextView) findViewById(R.id.flashcard_question)).setText(flashcard.getAnswer());
                 ((TextView) findViewById(R.id.flashcard_new_answer)).setText(flashcard.getQuestion());
+                ((TextView) findViewById(R.id.flashcard_question)).setText(flashcard.getAnswer());
+
+                flashcardQuestion.setVisibility(View.VISIBLE);
+                flashcardAnswer.setVisibility(View.INVISIBLE);*/
+
+
+                final Animation leftOutAnim = AnimationUtils.loadAnimation(view.getContext(), R.anim.left_out);
+                final Animation rightInAnim = AnimationUtils.loadAnimation(view.getContext(), R.anim.right_in);
+
+                leftOutAnim.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+                        // this method is called when the animation first starts
+                        //findViewById(R.id.flashcard_question).startAnimation(leftOutAnim);
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        // this method is called when the animation is finished playing
+                        findViewById(R.id.flashcard_question).startAnimation(rightInAnim);
+
+                        //moved previous logic here
+                        Flashcard flashcard = allFlashcards.get(currentCardDisplayedIndex);
+
+                        ((TextView) findViewById(R.id.flashcard_question)).setText(flashcard.getQuestion());
+                        ((TextView) findViewById(R.id.flashcard_new_answer)).setText(flashcard.getAnswer());
+
+                        flashcardQuestion.setVisibility(View.VISIBLE);
+                        flashcardAnswer.setVisibility(View.INVISIBLE);
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+                        // we don't need to worry about this method
+                    }
+                });
+
+                findViewById(R.id.flashcard_question).startAnimation(leftOutAnim);
+
             }
         });
 
@@ -161,6 +219,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Animation testAnimation = AnimationUtils.loadAnimation(this, R.anim.left_out);
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -177,6 +236,7 @@ public class MainActivity extends AppCompatActivity {
         Intent toAddCardActivity = new Intent(this, AddCardActivity.class);
         startActivity(toAddCardActivity);
         startActivityForResult(toAddCardActivity, 100);
+        overridePendingTransition(R.anim.right_in, R.anim.left_out);
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){

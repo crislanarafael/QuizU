@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.LogPrinter;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -25,11 +27,15 @@ public class AddCardActivity extends AppCompatActivity {
         question = findViewById(R.id.question);
         answer = findViewById(R.id.answer);
 
+        //Load animation from XML
+        Animation upAnimation = AnimationUtils.loadAnimation(this, R.anim.up_out);
+
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 finish();
+
 
             }
         });
